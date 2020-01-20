@@ -1,23 +1,20 @@
 #default Data for Testing
-customer_details = [
-    {
+customer_details = [{
     "Email": "omoloja.kazeem@gmail.com",
     "Password": "123456",
     "Balance":120
-},
-    {
+},{
     "Email": "omoloja.kaz@gmail.com",
-    "Password": "Olute",
+    "Password": "olute",
     "Balance":100.0
-}
-]
+}]
 
 
 def initialize():
     option = input("""
 Press 1: Create Account
 Press 2: Transaction 
-Pres Quit: Exit >
+Press 0: Exit >
     """)
     while True:
         if option == '1':
@@ -46,8 +43,8 @@ def create_account():
     1. email/Unique identity
     2. Password
     """)
-    email = input("Enter your Email: ")
-    password = input("Enter your Password: ")
+    email = input("Enter your Email: ").lower()
+    password = input("Enter your Password: ").lower()
     if email not in customer_details:
         if '@' and '.' in email:
             customer_details.append({'Email':email})
@@ -62,8 +59,8 @@ def create_account():
 
     
 def perform_transaction():
-    user_email = input("Enter your Email: ")
-    user_pass = input("Enter your Password: ")
+    user_email = input("Enter your Email: ").lower()
+    user_pass = input("Enter your Password: ").lower()
     for data in customer_details:
         if user_email in data['Email']:
             if data['Password'] == user_pass:
@@ -89,7 +86,7 @@ def perform_transaction():
                 elif option == '4':
                     transfer = int(input("How much do you want to Transfer?: "))
                     if data['Balance'] > transfer:
-                        recepient_email = input("Enter receipient Email: ")
+                        recepient_email = input("Enter receipient Email: ").lower()
                         data['Balance'] -= transfer
                         for n in customer_details:
                             if n['Email'] == recepient_email:
@@ -106,6 +103,7 @@ def perform_transaction():
             else:
                 print("Can't Find User")
                 initialize()
-        
+
+
 initialize()
 global option
